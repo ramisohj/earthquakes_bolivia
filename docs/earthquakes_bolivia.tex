@@ -86,7 +86,7 @@
     \textsc{\LARGE PARA}\\[1.0cm]
     \textsc{\LARGE CIENCIA DE DATOS}\\[3.0cm]
     \HRule\\[0.4cm]
-    {\large \bf {PRÁCTICA I}}\\[0.2cm]
+    {\large \bf {PROYECTO DEL MODULO V}}\\[0.2cm]
     \HRule\\[2.0cm]
 \end{center}
 
@@ -121,7 +121,7 @@
 \end{center}
 
 \begin{center}
-    \large \bf 2025, Febrero 7
+    \large \bf 2025, Marzo 14
 \end{center}
 
 \thispagestyle{empty}
@@ -148,10 +148,10 @@
 \end{center}
 
 Bolivia tiene una geografía muy variada, y una de las características principales son sus montañas, los cuales provienen de la cordillera de los Andes que al ingresar al país se divide es dos ramas, cordillera occidental y cordillera oriental, esto fue producido por los diferentes movimientos de las placas tectónicas los cuales son muy recurrentes en el país.
-En el cono sur de Cochabamba, a finales de la década de los ’90 se produjo varios terremotos que afectaron gravemente a los municipios de Aiquile, Mizque y Totora. Varias familias quedaron afectadas además que los terremotos en aquella región dejaron grandes pérdidas humanas y económicas.
+En el cono sur de Cochabamba, a finales de la década de los ’90 se produjo varios terremotos que afectaron gravemente a los municipios de Aiquile, Mizque y Totora. Varias familias quedaron afectadas además que los terremotos en aquella región dejaron grandes pérdidas económicas como también pérdidas humanas.
 \\
 
-El siguiente estudio pretende hacer un \textbf{análisis para determinar el nivel de riesgo sísmico que tiene cada región del país} con respecto a los terremotos. Para tal caso se recopilará datos sísmicos por municipios.
+El siguiente estudio pretende hacer una \textbf{identificación de áreas críticas a partir de datos sísmicos en Bolivia} con respecto a los terremotos. Para tal caso se recopilará datos sísmicos por municipios.
 
 
 \section{Identificación del problema}
@@ -160,151 +160,133 @@ El siguiente estudio pretende hacer un \textbf{análisis para determinar el nive
   \includegraphics[width=6cm]{bolivia_regiones}
 \end{center}
 
-
-\textbf{Determinar el nivel de riesgo sisimico para cada región de Bolivia.}
-
+\begin{center}
+\textbf{Determinar áreas críticas a partir de datos sísmicos en Bolivia.}
+\end{center}
 
 \begin{center}
   \includegraphics[width=6cm]{bolivia_eq1}
 \end{center}
 
-
-\section{Análisis del problema}
-
-El objetivo principal de este proyecto es clasificar las regiones o municipios de Bolivia según su riesgo sísmico, primeramente, teniendo estos parámetros:
+Para realizar el análisis de áreas críticas por movimientos sísmicos se requiere la siguiente información:
 
 \begin{itemize}
-\item\textbf{very\_low} 	= Municipios donde nunca se produjo actividad sísmica.
-\item \textbf{low}		= Municipios con menos de 5 registros sísmicos.
-\item \textbf{mid}	= Municipios entre 5 – 20 registros sisimicos.
-\item \textbf{high}	= Municipios entre 20 – 100 registros sísmicos.
-\item \textbf{very\_high}	= Municipios con más de 100 registros sísmicos.
+\item Registro sísmico. (date, location, magnitude, deep)
+\item Mapa geografico de:
+	\begin{itemize}
+	\item Frontera del país
+	\item Departamentos
+	\item Provincias
+	\item Municipios
+	\end{itemize}
+\item Mapa geológico de Bolivia.
+\item Mapa de asentamientos urbanos.
+
 \end{itemize}
 
 
+
+
+\section{Análisis del problema}
+
+Para realizar el siguiente estudio, es necesario los datos sísmicos, datos geográficos, datos urbanísticos, con los cuales se tiene que trabajar en los siguientes puntos:
+
+\begin{itemize}
+\item Identificar patrones y zonas con alta actividad sísmica.
+\item Determinar áreas críticas con mayor vulnerabilidad.
+\item Facilitación en la toma de decisiones para la gestión de riesgos y la prevención de desastres.
+\end{itemize}
 
 
 \section{Análisis  de los datos}
 
-Para el estudio de datos se seleccionaron las siguientes variables:
+Para realizar un análisis efectivo, se obtuvieron los siguientes datos:
+
+\begin{itemize}
+\item Datos históricos de sismos desde 2009 hasta la fecha actual. \textbf{(3865 records)}
+\item Mapas geográficos del país, departamentos, provincias, municipios. \textbf{(GeoJSON files)}
+\end{itemize}
+
+\subsection{Datos históricos de sismos}
+
+Los datos sísmicos son proporcionados a través del \textbf{Observatorio San Calixto}, que es una fundación privada, cuya principal actividad es el monitoreo y vigilancia de la actividad sísmica en Bolivia.
 
 
-\begin{table}[H]
-\centering
-\begin{tabular}{c c c}
-	\hline\hline & \\[-1.5ex]
-		\textbf{VARIABLE} &
-		\textbf{TIPO DE VARIABLE} &
-		\textbf{TABLA ORIGEN}\\ [0.5ex]
-	\hline\hline & \\[1.5ex]
-		municipality\_code &
-		cualitativa & 
-		bol\_adm3
-  		\\ [1ex]
-	\hline & \\[-1.5ex]
-department &
-cualitativa	&
-bol\_adm1
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-province & cualitativa & bol\_adm2
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-municipality & cualitativa & bol\_adm3
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-earthquake\_count & cuantitativa & earthquake\_bol
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-	
-risk & cuantitativa & earthquake\_bol
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-	
-min\_mag & cuantitativa & earthquake\_bol
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-	
-	max\_mag & cuantitativa & earthquake\_bol
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-	
-	avg\_mag & cuantitativa & earthquake\_bol
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-	
-	min\_depth & cuantitativa & earthquake\_bol
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-	
-	max\_depth & cuantitativa & earthquake\_bol
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-	
-	avg\_depth & cuantitativa & earthquake\_bol
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-	
-	min\_sig & cuantitativa & earthquake\_bol
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-	
-	max\_sig & cuantitativa & earthquake\_bol
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-	
-	avg\_sig & cuantitativa & earthquake\_bol
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-	
-	seismic\_centroid & cuantitativa (geo-data) & earthquake\_bol\_detail
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-	
-	seismic\_point & cuantitativa (geo-data) & earthquake\_bol\_detail
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
-	
-	municipality\_area & cuantitativa (geo-data) & bol\_adm3
-  	\\ [1ex]
-	\hline & \\[-1.5ex]
+\begin{center}
+  \includegraphics[width=5cm]{san_calixto}
+\end{center}
 
+
+Para obtener todos los datos, se hizo un parser que navegaba a través de cada página por cada uno de los sismos registrados en el sitio oficial del observatorio. Esta etapa se llamó extracción de datos.\\
+La siguiente etapa fue la transformación de los datos en información válida, omitiendo los campos nulos, haciendo un tipado de los datos a sus correctivos formatos. La localización de cada sismo  se guardó en formato de geodata. (Point que es representado por coordenadas: longitud, latitud)\\
+Por último, se guardó esta información en formato \textbf{GeoJSON} para que pueda ser importada desde cualquier herramienta. En Tableau se importó el archivo como Spatial File.\\
+
+La validación de los registros sísmicos también se hizo mediante \textbf{PostgreSQL}, usando su extensión de \textbf{PostGIS}, con el cual se observó que algunos registros sísmicos pertenecían a otros países, se omitieron \textbf{85} registros.
+Los registros sísmicos válidos son \textbf{3865}, los cuales fueron exportados en formato \textbf{GeoJSON} para su posterior tratamiento en \textbf{Tableau}.
+
+\begin{center}
+\begin{tabular}{c}
+	\hline\hline 
+	\textbf{Todos los registros sísmicos}
+	\\ 
+	\hline 
+	\\[-1.5ex]
+  	\includegraphics[width=12cm]{out\_bolivia}
+  	\\[1ex]
+  	\hline\hline
+	\textbf{Registros sísmicos válidos}
+	\\
+	\hline
+	\\[-1.5ex]
+	 \includegraphics[width=12cm]{in\_bolivia}
+	\\[1ex]
+	\hline\hline 
 \end{tabular}
-\label{table:nonlin}
-\end{table}
+\end{center}
 
 
-Todas las variables mencionadas en la tabla son la combinación de unir las siguientes tablas:
+\subsection{Mapas geográficos}
 
-\begin{itemize}
-\item \textbf{bol\_adm1} (geo-data de los departamentos)
-\item \textbf{bol\_adm2} (geo-data de las provincias)
-\item \textbf{bol\_adm3} (geo-data de los municipios)
-\item \textbf{earthquake\_bol} (información importante sísmica)
-\item \textbf{earthquake\_bol\_detail} (geo-data de los puntos sísmicos)
-\end{itemize}
-
-
-
-Para el objetivo del proyecto, se clasifico a los municipios según su nivel sisimico en los siguientes grupos:
+Los mapas geográficos se obtuvieron mediante archivos \textbf{GeoJSON}, el cual utiliza geodata para generar las áreas del país, departamentos, provincias y municipios.
+Estos archivos geojson se obtuvieron de un dataset de la página web data de \textbf{OCHA Services}, el cual contenía cuatro archivos que son los siguientes:
 
 \begin{itemize}
-\item \textbf{very\_low} 	0 sismos registrados en un municipio
-\item \textbf{low}		[1 - 5] sismos registrados.
-\item \textbf{mid}		[5 - 20] sismos registrados.
-\item \textbf{high}		[20 - 100] sismos registrados.
-\item \textbf{very\_high}	[> 100] sismos registrados.
+\item \textbf{bol\_adm0} (geodata para el mapa del país.)
+\item \textbf{bol\_adm1} (geodata para los mapas de los departamentos.)
+\item \textbf{bol\_adm2} (geodata para los mapas de las provincias.)
+\item \textbf{bol\_adm3} (geodata para los mapas de los municipios.)
 \end{itemize}
 
+\begin{center}
+\begin{tabular}{c c}
+	\hline\hline 
+	\textbf{bol\_adm0} & \textbf{bol\_adm1}
+	\\
+	\hline & \\[-1.5ex]
+  	\includegraphics[width=8cm]{adm0}
+	&
+  	\includegraphics[width=8cm]{adm1}
+	\\ [0.5ex]
+	\hline\hline
+		\textbf{bol\_adm2} & \textbf{bol\_adm3}
+	\\
+	\hline & \\[-1.5ex]
+  	\includegraphics[width=8cm]{adm2}
+	&
+  	\includegraphics[width=8cm]{adm3}
+	\\[1ex]
+	\hline\hline & \\[-1.5ex]
+\end{tabular}
+\end{center}
 
 \section{Resultados de las muestras}
 
 \begin{center}
-  \includegraphics[width=10cm]{bolivia_eq2}
+  \includegraphics[width=17cm]{tableau\_init}
 \end{center}
 
 En los resultados del proyecto se pudo clasificar a las regiones en dos grupos, aquellos municipios que tienen actividad sísmica, que mayormente se encuentran en el occidente del país, y los municipios que nos registran actividad sísmica que en su mayoría se encuentran en el oriente.
-Existen datos de ciertas regiones donde ya se registran mas de 100 eventos sísmicos contabilizados desde 1920. En total se trabajo con 2006 records para eventos sísmicos los cuales fueron eventos que se suscitaron en 139 municipios de las mas de 340 que existen en el país.
+Existen datos de ciertas regiones donde ya se registran mas de 100 eventos sísmicos contabilizados desde 2009. En total se trabajo con 3865 records para eventos sísmicos los cuales fueron eventos que se suscitaron en 139 municipios de las mas de 340 que existen en el país.
 
 
 
